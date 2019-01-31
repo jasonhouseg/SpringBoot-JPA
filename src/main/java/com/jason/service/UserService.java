@@ -1,6 +1,6 @@
 package com.jason.service;
 
-import com.jason.dao.UserDao;
+import com.jason.repository.UserRepository;
 import com.jason.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,23 +17,23 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository UserRepository;
 
     public void saveUser(User user) {
-        userDao.save(user);
+        UserRepository.save(user);
     }
 
     public User findByUserName(String userName) {
-        return userDao.findByUserName(userName);
+        return UserRepository.findByUserName(userName);
     }
 
     @Transactional
     public void deleteById(Long id) {
-        userDao.deleteById(id);
+        UserRepository.deleteById(id);
     }
 
     public List<User> findByUserNameContaining(String keyword) {
-        return userDao.findByUserNameContaining(keyword);
+        return UserRepository.findByUserNameContaining(keyword);
     }
 
 }

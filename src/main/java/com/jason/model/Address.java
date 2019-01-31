@@ -19,6 +19,9 @@ public class Address {
     @Column
     private String address;
 
+    @Column
+    private String userId;
+
     public Long getId() {
         return id;
     }
@@ -33,5 +36,13 @@ public class Address {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

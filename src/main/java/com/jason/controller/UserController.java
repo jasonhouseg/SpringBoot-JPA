@@ -1,6 +1,8 @@
 package com.jason.controller;
 
-import com.jason.dao.UserDao;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.jason.repository.UserRepository;
 import com.jason.model.User;
 import com.jason.service.UserService;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *  * Description:用户控制器
@@ -26,7 +29,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    UserDao userDao;
+    UserRepository userRepository;
 
     /**
      * 添加用户
@@ -34,7 +37,7 @@ public class UserController {
     @RequestMapping("/save")
     public void saveUser () {
         User user = new User();
-        user.setuserName("李四");
+        user.setuserName("王五");
         user.setPassword("123123");
         userService.saveUser(user);
         logger.warn("添加用户成功======================");
@@ -48,14 +51,21 @@ public class UserController {
     @ResponseBody
     public List<User> girlList() {
         // 查询所有用户
-        List<User> users = userDao.findAll();
+        List<User> users = userRepository.findAll();
         logger.info(users.toString());
 
         // 根据用户名精确查询用户
         User user = userService.findByUserName("李四");
 
         // 根据用户名模糊查询用户
-        List<User> userList =  userDao.findByUserNameContaining("四");
+        List<User> userList =  userRepository.findByUserNameContaining("四");
+
+        // //SPEL表达式查询用户
+        User user2 = userRepository.findByUserName("李四");
+
+        // 占位符传值形式关联表查询用户及地址
+        Map<String, Object> userAddr = userRepository.findUserAndAddressByUserName("李四");
+        logger.warn(users.toString());
         return users;
     }
 
@@ -65,15 +75,16 @@ public class UserController {
     @RequestMapping("/update/{id}")
     public void updateUser (@PathVariable("id") Long id) {
         User user = new User();
-        user.setId(id);
-        user.setuserName("李四-修改后");
-        user.setPassword("123123");
-        userService.saveUser(user);
-        logger.warn("修改用户成功======================");
+//        user.setId(id);
+//        user.setuserName("李四-修改后");
+//        user.setPassword("123123");
+//        userService.saveUser(user);
+        userRepository.updateById("888888", id);// 测试自定义repository
+        logger.warn("修改用户信息成功======================");
     }
 
     /**
-     * 删除一个女生
+     * 删除用户
      *
      * @param id
      */
