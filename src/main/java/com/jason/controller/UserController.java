@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.jason.repository.UserRepository;
 import com.jason.model.User;
 import com.jason.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import java.util.Map;
  * @author jason
  * @date 2019-01-29 18:07
  */
+@Api(value = "用户接口类", tags = "用户信息相关")
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -34,6 +37,7 @@ public class UserController {
     /**
      * 添加用户
      */
+    @ApiOperation(value = "添加用户", notes = "添加用户,入参:user")
     @RequestMapping("/save")
     public void saveUser () {
         User user = new User();
