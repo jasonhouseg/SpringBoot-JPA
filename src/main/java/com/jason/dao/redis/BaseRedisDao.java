@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -57,13 +58,22 @@ public abstract class BaseRedisDao {
     }
 
     /**
-     * 获取当前redis库下所有对象
+     * 获取当前redis库下所有对象值列表
      *
      * @return
      */
     public List<String> getAll() {
         return hashOperations.values(getRedisKey());
     }
+
+    /**
+     * 获取当前redis库下所有对象键值
+     * @return
+     */
+    public Map<String, String> getAllEntries() {
+        return hashOperations.entries(getRedisKey());
+    }
+
 
     /**
      * 查询查询当前redis库下所有key
