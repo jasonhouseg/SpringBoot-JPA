@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * Description: 测试session信息保存到redis类
+ * Description: 测试session信息保存到redis，并提供给nginx作负载均衡测试类
  *
  * @author jason
  * @date 2019-02-01 14:46
@@ -26,10 +26,11 @@ public class SessionController {
     public String putSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
         logger.info(session.getClass().getName());
-        logger.info(session.getId());
+        logger.info("sessionId=======1111111111======="+session.getId());
         String name = "zhongJason";
         session.setAttribute("user", name);
+        String sessionId = session.getId();
 
-        return "hello!"+name;
+        return "hello=11111"+name+"------sessionId:"+sessionId;
     }
 }
