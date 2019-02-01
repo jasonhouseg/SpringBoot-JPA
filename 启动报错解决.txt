@@ -1,0 +1,6 @@
+【JDBC】java.sql.SQLException: The server time zone value 'ÖÐ¹ú±ê×¼Ê±¼ä' is unrecognized or represents more than one time zone.
+在使用阿里的druid 时，报了一个异常java.sql.SQLException: The server time zone value 'ÖÐ¹ú±ê×¼Ê±¼ä' is unrecognized or represents more than one time zone.
+
+貌似是时区问题，参考了这个博客https://blog.csdn.net/u011702479/article/details/82118113
+
+在druid.properties配置文件中，的url的url=jdbc:mysql://localhost:3306/day19的后面加上?serverTimezone=GMT%2B8参数即可！

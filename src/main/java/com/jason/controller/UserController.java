@@ -7,6 +7,7 @@ import com.jason.model.User;
 import com.jason.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,14 +77,15 @@ public class UserController {
     /**
      * 根据id修改用户
      */
+    @ApiOperation(value = "根据id修改用户", notes = "根据id修改用户")
     @RequestMapping("/update/{id}")
-    public void updateUser (@PathVariable("id") Long id) {
+    public void updateUser (@ApiParam(value = "用户ID")@PathVariable("id") Long id) {
         User user = new User();
 //        user.setId(id);
 //        user.setuserName("李四-修改后");
 //        user.setPassword("123123");
 //        userService.saveUser(user);
-        userRepository.updateById("888888", id);// 测试自定义repository
+        userRepository.updateById("afadfsd888888", id);// 测试自定义repository
         logger.warn("修改用户信息成功======================");
     }
 

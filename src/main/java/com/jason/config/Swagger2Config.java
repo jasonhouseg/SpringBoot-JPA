@@ -27,8 +27,8 @@ public class Swagger2Config {
     public Docket testApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.jason.controller"))
+                .select()// 按条件指定生成文档接口
+                .apis(RequestHandlerSelectors.basePackage("com.jason.controller"))// 指定包
                 .paths(PathSelectors.any())
                 .build();
     }
